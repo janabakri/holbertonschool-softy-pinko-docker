@@ -3,15 +3,22 @@ services:
     build:
       context: ./back-end
       dockerfile: Dockerfile
+<<<<<<< HEAD
     ports:
       - "5252:5252"
     networks:
       - app-network
+=======
+    # تم إزالة ports: - "5252:5252"
+    networks:
+      - softy-pinko-network
+>>>>>>> d9bd2cba4b701c8c366ff40aa04f28f8dbe1d2da
 
   front-end:
     build:
       context: ./front-end
       dockerfile: Dockerfile
+<<<<<<< HEAD
     ports:
       - "9000:9000"
     depends_on:
@@ -21,4 +28,26 @@ services:
 
 networks:
   app-network:
+=======
+    # تم إزالة ports: - "9000:9000"
+    depends_on:
+      - back-end
+    networks:
+      - softy-pinko-network
+
+  proxy:
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - front-end
+      - back-end
+    networks:
+      - softy-pinko-network
+
+networks:
+  softy-pinko-network:
+>>>>>>> d9bd2cba4b701c8c366ff40aa04f28f8dbe1d2da
     driver: bridge
